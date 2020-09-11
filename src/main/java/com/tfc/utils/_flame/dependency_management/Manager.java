@@ -16,6 +16,10 @@ import java.util.ArrayList;
 public class Manager {
 	private final FlameLoader loader;
 	
+	public FlameLoader getLoader() {
+		return loader;
+	}
+	
 	public Manager(FlameLoader loader) {
 		this.loader = loader;
 	}
