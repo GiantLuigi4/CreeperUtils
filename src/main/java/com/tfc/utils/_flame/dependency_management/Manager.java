@@ -24,7 +24,7 @@ public class Manager {
 		this.loader = new FlameLoader(jarName);
 	}
 	
-	public static Manager constructFromDependencies(Class<FlameLoader> loader, String URLDeps, String gradleLikeDeps, File[] otherDeps) throws MalformedURLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+	public static Manager constructFromDependencies(Class<? extends FlameLoader> loader, String URLDeps, String gradleLikeDeps, File[] otherDeps) throws MalformedURLException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 		ArrayList<URL> urls = new ArrayList<>();
 		String repo = "";
 		for (String s : gradleLikeDeps.split(",")) {
