@@ -43,7 +43,7 @@ public class Manager {
 					info[2] = info[2].replace("" + File.separatorChar, "");
 					s1 = info[0] + File.separatorChar + info[2] + File.separatorChar + info[1] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
 					String urlS = info[0] + File.separatorChar + info[1] + File.separatorChar + info[2] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1).replace(".jar", ".zip"));
+					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();
@@ -68,12 +68,12 @@ public class Manager {
 		}
 		
 		String file = "";
-		for (String s : URLDeps.toString().split(",")) {
+		for (String s : URLDeps.split(",")) {
 			try {
 				if (file.equals("")) {
 					file = s;
 				} else {
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar).replace(".jar", ".zip")));
+					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar)));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();
@@ -122,7 +122,7 @@ public class Manager {
 					info[2] = info[2].replace("" + File.separatorChar, "");
 					s1 = info[0] + File.separatorChar + info[2] + File.separatorChar + info[1] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
 					String urlS = info[0] + File.separatorChar + info[1] + File.separatorChar + info[2] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1).replace(".jar", ".zip"));
+					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();
@@ -154,7 +154,7 @@ public class Manager {
 				if (file.equals("")) {
 					file = s;
 				} else {
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar).replace(".jar", ".zip")));
+					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar)));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();
