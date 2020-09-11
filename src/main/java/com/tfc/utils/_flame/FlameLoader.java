@@ -19,6 +19,10 @@ public class FlameLoader {
 		loader = new FlameURLLoader(new URL[]{new File(Files.dir + "\\" + jarName).toURL()});
 	}
 	
+	public FlameLoader(URL[] urls) {
+		loader = new FlameURLLoader(urls);
+	}
+	
 	public void addDep(File path) throws MalformedURLException {
 		loader.addURL(path.toURL());
 	}

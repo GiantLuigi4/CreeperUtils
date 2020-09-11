@@ -10,15 +10,20 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class GroovyClassFlameLoader extends FlameLoader {
+public class GroovyFlameClassLoader extends FlameLoader {
 	private final GroovyFlameLoader loader;
 	
-	public GroovyClassFlameLoader(GroovyFlameLoader loader) {
+	public GroovyFlameClassLoader(GroovyFlameLoader loader) {
 		super((FlameURLLoader) null);
 		this.loader = loader;
 	}
 	
-	public GroovyClassFlameLoader(String jarName) throws MalformedURLException {
+	public GroovyFlameClassLoader(URL[] urls) {
+		super((FlameURLLoader) null);
+		loader = new GroovyFlameLoader(urls);
+	}
+	
+	public GroovyFlameClassLoader(String jarName) throws MalformedURLException {
 		super((FlameURLLoader) null);
 		loader = new GroovyFlameLoader(new URL[]{new File(Files.dir + "\\" + jarName).toURL()});
 	}
