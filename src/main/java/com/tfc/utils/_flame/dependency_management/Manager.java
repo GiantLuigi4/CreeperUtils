@@ -64,4 +64,36 @@ public class Manager {
 			}
 		}
 	}
+	
+	public void addFromURL(String dependencies) {
+		String file = "";
+		for (String s : dependencies.toString().split(",")) {
+			try {
+				if (file.equals("")) {
+					file = s;
+				} else {
+					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar).replace(".jar", ".zip")));
+					if (!output.exists()) {
+						output.getParentFile().mkdirs();
+						output.createNewFile();
+						
+						String url = s;
+						try {
+							URL url1 = new URL(url.replace("" + File.separatorChar, "/"));
+							System.out.println(url1.toString());
+							//https://stackabuse.com/how-to-download-a-file-from-a-url-in-java/
+							Files.copy(url1.openStream(), output.toPath(), StandardCopyOption.REPLACE_EXISTING);
+						} catch (Throwable err) {
+							FlameConfig.logError(err);
+						}
+					}
+					loader.addDep(output.toURL());
+					file = "";
+				}
+			} catch (Throwable err) {
+				FlameConfig.logError(err);
+				file = "";
+			}
+		}
+	}
 }
