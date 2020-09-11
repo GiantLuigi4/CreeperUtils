@@ -4,19 +4,25 @@ import com.tfc.flame.FlameConfig;
 import groovy.lang.GroovyClassLoader;
 import org.apache.bcel.util.ClassPath;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.JarURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.net.URLConnection;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.jar.JarFile;
 
 //I literally just copy/pasted the FlameURLLoader, as it is my own project, just like this, but made it extend the GroovyClassLoader instead of a normal ClassLoader
 public class GroovyFlameLoader extends GroovyClassLoader {
+	private URL[] urls;
+	
 	public GroovyFlameLoader(URL[] urls) {
 		super();
-		for (URL url:urls) super.addURL(url);
+		this.urls = urls;
+//		for (URL url:urls) super.addURL(url);
 	}
 	
 	public Class<?> load(String name, boolean resolve) throws ClassNotFoundException {
@@ -159,8 +165,8 @@ public class GroovyFlameLoader extends GroovyClassLoader {
 					//Use replacement getters
 					for (Function<String, byte[]> function : replacementGetters.values()) {
 						byte[] bytes2 = function.apply(name);
-						if (bytes2!=null) {
-							bytes1=bytes2;
+						if (bytes2 != null) {
+							bytes1 = bytes2;
 						}
 					}
 					//Handle ASM
@@ -216,5 +222,22 @@ public class GroovyFlameLoader extends GroovyClassLoader {
 			newBytesReturn[i] = newBytes.get(i);
 		}
 		return newBytesReturn;
+	}
+	
+	public URL getResource(String name) {
+		try {
+			URL url = super.getResource(name);
+			if (url == null) {
+				for (URL url1 : urls) {
+					try {
+						new URL("jar:file/:" + url1.getFile().replace("\\", "/") + "!/" + name.replace(".", "/"));
+					} catch (Throwable ignored) {
+					}
+				}
+			}
+			return url;
+		} catch (Throwable ignored) {
+		}
+		return null;
 	}
 }
