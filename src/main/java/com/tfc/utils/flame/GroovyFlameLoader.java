@@ -1,4 +1,4 @@
-package com.tfc.utils._flame;
+package com.tfc.utils.flame;
 
 import com.tfc.flame.FlameConfig;
 import groovy.lang.GroovyClassLoader;

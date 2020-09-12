@@ -1,9 +1,8 @@
-package com.tfc.utils._flame.dependency_management;
+package com.tfc.utils.flame.dependency_management;
 
 import com.tfc.flame.FlameConfig;
 import com.tfc.flame.FlameURLLoader;
-
-import com.tfc.utils._flame.FlameLoader;
+import com.tfc.utils.flame.FlameLoader;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;

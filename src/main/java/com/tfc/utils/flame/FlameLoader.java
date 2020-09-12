@@ -1,7 +1,7 @@
-package com.tfc.utils._flame;
+package com.tfc.utils.flame;
 
-import com.tfc.utils.Files;
 import com.tfc.flame.FlameURLLoader;
+import com.tfc.utils.Files;
 
 import java.io.File;
 import java.io.InputStream;

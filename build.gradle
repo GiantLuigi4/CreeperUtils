@@ -9,6 +9,8 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
+    jcenter()
+    google()
 }
 
 dependencies {
@@ -16,4 +18,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     compileOnly "com.github.GiantLuigi4:FlameLoader:f0250ebbd7"
+
+    // https://mvnrepository.com/artifact/jep/jep
+    compile group: 'jep', name: 'jep', version: '2.24'
 }

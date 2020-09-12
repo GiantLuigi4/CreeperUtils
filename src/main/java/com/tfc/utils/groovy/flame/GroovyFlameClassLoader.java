@@ -2,8 +2,8 @@ package com.tfc.utils.groovy.flame;
 
 import com.tfc.flame.FlameURLLoader;
 import com.tfc.utils.Files;
-import com.tfc.utils._flame.FlameLoader;
-import com.tfc.utils._flame.GroovyFlameLoader;
+import com.tfc.utils.flame.FlameLoader;
+import com.tfc.utils.flame.GroovyFlameLoader;
 
 import java.io.File;
 import java.io.InputStream;
