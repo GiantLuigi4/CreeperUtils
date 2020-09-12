@@ -4,22 +4,23 @@ import com.tfc.flame.FlameConfig;
 import groovy.lang.GroovyClassLoader;
 import org.apache.bcel.util.ClassPath;
 
-import java.io.Closeable;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
-import java.net.JarURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.jar.JarFile;
 
 //I literally just copy/pasted the FlameURLLoader, as it is my own project, just like this, but made it extend the GroovyClassLoader instead of a normal ClassLoader
 public class GroovyFlameLoader extends GroovyClassLoader {
+	ArrayList<URL> addedURLs = new ArrayList<>();
+	
 	public GroovyFlameLoader(URL[] urls) {
 		super();
-		for (URL url:urls) super.addURL(url);
+		for (URL url : urls) this.addURL(url);
 	}
 	
 	public Class<?> load(String name, boolean resolve) throws ClassNotFoundException {
@@ -62,6 +63,8 @@ public class GroovyFlameLoader extends GroovyClassLoader {
 	
 	public void addURL(URL url) {
 		super.addURL(url);
+		if (new File(url.getFile()).isDirectory())
+			this.addedURLs.add(url);
 	}
 	
 	public void findReplacement(String name) {
@@ -129,27 +132,41 @@ public class GroovyFlameLoader extends GroovyClassLoader {
 //				long t0 = System.nanoTime();
 				try {
 					byte[] bytes1 = null;
-					for (URL url : this.getURLs()) {
-						if (bytes1 == null) {
-							try {
-								bytes1 = new ClassPath(url.getPath()).getBytes(name);
-							} catch (Throwable ignored) {
-							}
-						}
-					}
-					if (bytes1 == null) {
+					for (URL url : this.addedURLs) {
+						String path = url.toString();
+						path = path + File.separatorChar + name.replace("/", "" + File.separatorChar);
+						File input = new File(path);
 						try {
-							InputStream stream = this.getResourceAsStream(name);
-							assert stream != null;
+							FileInputStream stream = new FileInputStream(input);
 							bytes1 = new byte[stream.available()];
 							stream.read(bytes1);
 							stream.close();
-						} catch (Throwable ignored1) {
+						} catch (Throwable ignored) {
 						}
 					}
 					if (bytes1 == null) {
-						for (Function<String, byte[]> function : baseCodeGetters.values()) {
-							bytes1 = function.apply(name);
+						for (URL url : this.getURLs()) {
+							if (bytes1 == null) {
+								try {
+									bytes1 = new ClassPath(url.getPath()).getBytes(name);
+								} catch (Throwable ignored) {
+								}
+							}
+						}
+						if (bytes1 == null) {
+							try {
+								InputStream stream = this.getResourceAsStream(name);
+								assert stream != null;
+								bytes1 = new byte[stream.available()];
+								stream.read(bytes1);
+								stream.close();
+							} catch (Throwable ignored1) {
+							}
+							if (bytes1 == null) {
+								for (Function<String, byte[]> function : baseCodeGetters.values()) {
+									bytes1 = function.apply(name);
+								}
+							}
 						}
 					}
 					if (replacements.containsKey(name)) {
