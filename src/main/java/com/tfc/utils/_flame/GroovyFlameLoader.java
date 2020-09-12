@@ -176,7 +176,8 @@ public class GroovyFlameLoader extends GroovyClassLoader {
 					//Load from parent
 					if (c == null && this.getParent() != null) c = this.getParent().loadClass(name);
 				} catch (ClassNotFoundException err) {
-					FlameConfig.logError(err);
+					if (!name.endsWith("__"))
+						FlameConfig.logError(err);
 				}
 				
 				if (c == null) {
