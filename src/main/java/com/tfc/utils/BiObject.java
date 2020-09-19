@@ -27,11 +27,11 @@ public class BiObject<V,K> {
 	}
 	
 	public void setObject1(V object1) {
+		if (isFinal) throw new RuntimeException(new IllegalAccessException("Cannot modify a final value."));
 		this.object1 = object1;
 	}
 	
 	public K getObject2() {
-		if (isFinal) throw new RuntimeException(new IllegalAccessException("Cannot modify a final value."));
 		return object2;
 	}
 	
