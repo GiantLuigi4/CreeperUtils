@@ -1,8 +1,8 @@
-package com.tfc.utils.flame.dependency_management;
+package tfc.utils.flame.dependency_management;
 
-import com.tfc.flame.FlameConfig;
-import com.tfc.flame.FlameURLLoader;
-import com.tfc.utils.flame.FlameLoader;
+import tfc.flame.FlameConfig;
+import tfc.flame.FlameURLLoader;
+import tfc.utils.flame.FlameLoader;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -42,7 +42,7 @@ public class Manager {
 					info[2] = info[2].replace("" + File.separatorChar, "");
 					s1 = info[0] + File.separatorChar + info[2] + File.separatorChar + info[1] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
 					String urlS = info[0] + File.separatorChar + info[1] + File.separatorChar + info[2] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1));
+					File output = new File((tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();
@@ -72,7 +72,7 @@ public class Manager {
 				if (file.equals("")) {
 					file = s;
 				} else {
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar)));
+					File output = new File((tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar)));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();
@@ -121,7 +121,7 @@ public class Manager {
 					info[2] = info[2].replace("" + File.separatorChar, "");
 					s1 = info[0] + File.separatorChar + info[2] + File.separatorChar + info[1] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
 					String urlS = info[0] + File.separatorChar + info[1] + File.separatorChar + info[2] + File.separatorChar + info[1] + "-" + info[2] + ".jar";
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1));
+					File output = new File((tfc.utils.Files.dir + File.separatorChar + "libs" + File.separatorChar + s1));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();
@@ -153,7 +153,7 @@ public class Manager {
 				if (file.equals("")) {
 					file = s;
 				} else {
-					File output = new File((com.tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar)));
+					File output = new File((tfc.utils.Files.dir + File.separatorChar + file.replace("/", "" + File.separatorChar)));
 					if (!output.exists()) {
 						output.getParentFile().mkdirs();
 						output.createNewFile();

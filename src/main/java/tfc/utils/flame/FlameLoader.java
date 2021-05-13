@@ -1,28 +1,26 @@
-package com.tfc.utils.groovy;
+package tfc.utils.flame;
 
-import groovy.lang.GroovyClassLoader;
+import tfc.flame.FlameURLLoader;
+import tfc.utils.Files;
 
 import java.io.File;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * A wrapper for a groovy class loader
- */
-public class GroovyLoader {
-	private final GroovyClassLoader loader;
+public class FlameLoader {
+	private final FlameURLLoader loader;
 	
-	public GroovyLoader(GroovyClassLoader loader) {
+	public FlameLoader(FlameURLLoader loader) {
 		this.loader = loader;
 	}
 	
-	public GroovyLoader() {
-		loader = new GroovyClassLoader();
+	public FlameLoader(String jarName) throws MalformedURLException {
+		loader = new FlameURLLoader(new URL[]{new File(Files.dir + "\\" + jarName).toURL()});
 	}
 	
-	public Class<?> load(String Class) throws ClassNotFoundException {
-		return loader.loadClass(Class);
+	public FlameLoader(URL[] urls) {
+		loader = new FlameURLLoader(urls);
 	}
 	
 	public void addDep(File path) throws MalformedURLException {
@@ -37,8 +35,8 @@ public class GroovyLoader {
 		loader.addURL(new File(path).toURL());
 	}
 	
-	public void addClassPath(String path) {
-		loader.addClasspath(path);
+	public Class<?> load(String Class) throws ClassNotFoundException {
+		return loader.loadClass(Class);
 	}
 	
 	public InputStream getResourceAsStream(String resource) {

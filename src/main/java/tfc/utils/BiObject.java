@@ -1,4 +1,4 @@
-package com.tfc.utils;
+package tfc.utils;
 
 /**
  * This is actually surprisingly useful at times

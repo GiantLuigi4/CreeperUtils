@@ -1,4 +1,4 @@
-package com.tfc.utils.python;
+package tfc.utils.python;
 
 import org.nfunk.jep.JEP;
 

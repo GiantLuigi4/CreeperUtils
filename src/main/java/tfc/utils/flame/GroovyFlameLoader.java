@@ -1,8 +1,8 @@
-package com.tfc.utils.flame;
+package tfc.utils.flame;
 
-import com.tfc.flame.FlameConfig;
 import groovy.lang.GroovyClassLoader;
 import org.apache.bcel.util.ClassPath;
+import tfc.flame.FlameConfig;
 
 import java.io.File;
 import java.io.FileInputStream;

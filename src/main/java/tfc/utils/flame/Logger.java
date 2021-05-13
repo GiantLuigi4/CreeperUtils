@@ -1,6 +1,6 @@
-package com.tfc.utils.flame;
+package tfc.utils.flame;
 
-import com.tfc.flame.FlameConfig;
+import tfc.flame.FlameConfig;
 
 //A copy of the logger class from my other project,
 public class Logger {
